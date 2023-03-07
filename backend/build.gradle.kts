@@ -2,7 +2,7 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val exposed_version: String by project
-val h2_version: String by project
+val graphql_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -38,7 +38,10 @@ dependencies {
     implementation("io.ktor:ktor-serialization-gson-jvm:$ktor_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("com.h2database:h2:$h2_version")
+    implementation("io.insert-koin:koin-ktor:3.3.1")
+    implementation("com.expediagroup", "graphql-kotlin", "2.0.0.RC1")
+    implementation("com.expediagroup", "graphql-kotlin-schema-generator", "2.0.0.RC1")
+
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")

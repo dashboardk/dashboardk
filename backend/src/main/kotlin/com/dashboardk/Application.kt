@@ -1,20 +1,21 @@
 package com.dashboardk
 
+import com.dashboardk.graphql.configureGraphQL
+import com.dashboardk.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import com.dashboardk.plugins.*
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-            .start(wait = true)
+        .start(wait = true)
 }
 
 fun Application.module() {
     configureSecurity()
-    configureHTTP()
     configureMonitoring()
     configureSerialization()
-    configureDatabases()
-    configureRouting()
+    configureStatusPage()
+    configureDi()
+    configureGraphQL()
 }
