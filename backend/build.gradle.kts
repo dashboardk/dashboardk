@@ -39,6 +39,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("io.insert-koin:koin-ktor:3.3.1")
+    implementation("com.charleskorn.kaml", "kaml", "0.52.0")
     implementation("com.expediagroup", "graphql-kotlin", "2.0.0.RC1")
     implementation("com.expediagroup", "graphql-kotlin-schema-generator", "2.0.0.RC1")
 
@@ -46,4 +47,5 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("com.google.truth", "truth", "1.1.3")
 }

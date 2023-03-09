@@ -1,0 +1,9 @@
+repos:
+  - name: backend
+    provider: github
+    url: https://github.com/dashboardk/dashboardk
+    token: dummy
+  - name: frontend
+    provider: github
+    url: https://github.com/dashboardk/dashboardk
+    token: dummy
