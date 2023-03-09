@@ -17,3 +17,14 @@ object DashboardTable : Table(name = "dashboard") {
 
     override val primaryKey = PrimaryKey(DashboardTable.id, name = "PK_Widget_ID")
 }
+
+object CodeRepoTable : Table(name = "code_repo") {
+    val id: Column<Long> = long("id").autoIncrement()
+    val name: Column<String> = varchar("name", 100)
+}
+
+object CommitTable : Table(name = "commit") {
+    val id: Column<Long> = long("id").autoIncrement()
+    val sha: Column<String> = varchar("sha", 1000)
+    val message: Column<String> = varchar("message", 1000)
+}

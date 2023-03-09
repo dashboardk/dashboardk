@@ -18,4 +18,13 @@ fun Application.module() {
     configureStatusPage()
     configureDi()
     configureGraphQL()
+
+    InitService.initDB(
+        ApplicationConfig.DB_HOST,
+        ApplicationConfig.DB_PORT,
+        ApplicationConfig.DB_USER_NAME,
+        ApplicationConfig.DB_PASSWORD,
+        ApplicationConfig.DB_NAME
+    )
+    InitService.initCollectors()
 }

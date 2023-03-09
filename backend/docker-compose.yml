@@ -1,0 +1,44 @@
+version: '3'
+services:
+  rest_api:
+    build:
+      context: .
+      dockerfile: Docker/backend.Dockerfile
+    container_name: backend-api-container
+    expose:
+      - 8080
+      - 8443
+      - 80
+      - 443
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      - DB_HOST=0.0.0.0
+      - DB_PORT=5432
+      - DB_USERNAME=
+      - DB_PASSWORD=
+      - AUTH_SECRET_KEY=
+    links:
+      - database:database
+    restart: always
+    volumes:
+      - ./ssl/:/etc/ssl/
+
+  database:
+    image: postgres:11.5-alpine
+    container_name: db-container
+    volumes:
+      - data-volume:/data/dashdb
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    ports:
+      - '5432:5432'
+    networks:
+      - default
+
+volumes:
+  data-volume:
+    external: true
