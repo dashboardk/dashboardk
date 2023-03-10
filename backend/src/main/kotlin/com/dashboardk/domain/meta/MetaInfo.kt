@@ -1,15 +1,15 @@
-package com.dashboardk.domain.configs
+package com.dashboardk.domain.meta
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DashboardConfig(
-    val repos: List<CodeRepoConfig>?
+data class MetaInfo(
+    val repos: List<RepoMetaInfo>?
 )
 
 @Serializable
-data class CodeRepoConfig(
+data class RepoMetaInfo(
     val name: String,
     val provider: RepoProvider,
     val url: String,

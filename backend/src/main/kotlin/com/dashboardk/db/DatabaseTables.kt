@@ -18,7 +18,7 @@ object DashboardTable : Table(name = "dashboard") {
     override val primaryKey = PrimaryKey(DashboardTable.id, name = "PK_Widget_ID")
 }
 
-object CodeRepoTable : Table(name = "code_repo") {
+object RepoTable : Table(name = "repo") {
     val id: Column<Long> = long("id").autoIncrement()
     val name: Column<String> = varchar("name", 100)
 }

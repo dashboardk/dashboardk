@@ -1,11 +1,11 @@
-package com.dashboardk.domain.configs
+package com.dashboardk.domain.meta
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class ConfigParserTest {
+class MetaInfoParserTest {
 
-    private val configParser = ConfigParser()
+    private val metaInfoParser = MetaInfoParser()
 
     @Test
     fun shouldReturnConfigForGivenString() {
@@ -21,7 +21,7 @@ repos:
     token: dummy
         """.trimIndent()
 
-        val config = configParser.parseConfig(configString)
+        val config = metaInfoParser.parseConfig(configString)
         assertThat(config).isNotNull()
     }
 }

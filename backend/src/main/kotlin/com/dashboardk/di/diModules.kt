@@ -1,8 +1,8 @@
-import com.dashboardk.domain.configs.ConfigFetcher
-import com.dashboardk.domain.configs.ConfigParser
-import com.dashboardk.domain.configs.ConfigReader
+import com.dashboardk.domain.meta.MetaInfoService
+import com.dashboardk.domain.meta.MetaInfoParser
+import com.dashboardk.domain.meta.MetaInfoReader
 import org.koin.dsl.module
 
 val appModule = module {
-    single { ConfigFetcher(ConfigReader(), ConfigParser()) }
+    single { MetaInfoService(MetaInfoReader(), MetaInfoParser()) }
 }

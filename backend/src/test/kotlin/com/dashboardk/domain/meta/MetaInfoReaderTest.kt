@@ -1,15 +1,15 @@
-package com.dashboardk.domain.configs
+package com.dashboardk.domain.meta
 
 import com.google.common.truth.Truth
 import org.junit.Test
 
-class ConfigReaderTest {
+class MetaInfoReaderTest {
 
-    private val configReader = ConfigReader()
+    private val metaInfoReader = MetaInfoReader()
 
     @Test
     fun shouldReturnConfigFromFile() {
-        val config = configReader.readConfig()
+        val config = metaInfoReader.readConfig()
         Truth.assertThat(config).isNotNull()
         Truth.assertThat(config).isEqualTo(
             """

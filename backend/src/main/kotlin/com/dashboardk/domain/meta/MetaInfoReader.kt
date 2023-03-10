@@ -1,8 +1,8 @@
-package com.dashboardk.domain.configs
+package com.dashboardk.domain.meta
 
 import java.io.File
 
-class ConfigReader {
+class MetaInfoReader {
     fun readConfig(): String {
         return File("dashboard.yml").readText()
     }

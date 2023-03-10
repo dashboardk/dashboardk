@@ -1,7 +1,7 @@
 package com.dashboardk
 
 import com.dashboardk.db.DatabaseFactory
-import com.dashboardk.domain.DashboardSystem
+import com.dashboardk.domain.collectors.CollectorService
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ object InitService {
         GlobalScope.launch {
             while (true) {
                 delay(Duration.ofHours(1))
-                DashboardSystem().crawlData()
+                CollectorService().collectData()
             }
         }
     }

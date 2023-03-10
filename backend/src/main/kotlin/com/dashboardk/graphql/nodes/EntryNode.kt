@@ -1,10 +1,20 @@
 package com.dashboardk.graphql.nodes
 
-import com.expediagroup.graphql.annotations.GraphQLContext
+import com.dashboardk.domain.collectors.CollectorService
 
+/**
+ * Root model for graphql.
+ * Will be consumed by GraphQL to generate GraphQL Endpoint
+ */
 class EntryNode {
-    fun dashboard(): DashboardNode {
-        return DashboardNode("")
+
+    private val collectorService: CollectorService by lazy { CollectorService() }
+
+    fun collectData() {
+        collectorService.collectData()
     }
 
+    fun dashboard(): DashboardNode {
+        return DashboardNode()
+    }
 }
