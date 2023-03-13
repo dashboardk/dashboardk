@@ -10,11 +10,8 @@ class EntryNode {
 
     private val collectorService: CollectorService by lazy { CollectorService() }
 
-    fun collectData() {
+    fun collectData(): Boolean {
         collectorService.collectData()
-    }
-
-    fun dashboard(): DashboardNode {
-        return DashboardNode()
+        return true
     }
 }
