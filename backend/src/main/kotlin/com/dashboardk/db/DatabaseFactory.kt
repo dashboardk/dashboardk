@@ -18,15 +18,15 @@ class DatabaseFactory(
     private val dbHost = "jdbc:postgresql://$dbUrl:$dbPort/$dbName"
 
     init {
-        val flyway = Flyway.configure()
-            .dataSource(dbHost, dbUser, dbPassword)
-            .baselineOnMigrate(true)
-            .load()
-        flyway.migrate()
+//        val flyway = Flyway.configure()
+//            .dataSource(dbHost, dbUser, dbPassword)
+//            .baselineOnMigrate(true)
+//            .load()
+//        flyway.migrate()
 
         Database.connect(hikari())
         transaction {
-            SchemaUtils.create(
+            SchemaUtils.createMissingTablesAndColumns(
                 CommitTable
             )
         }
