@@ -1,6 +1,7 @@
 package com.dashboardk.graphql.nodes
 
 import com.dashboardk.domain.collectors.CollectorService
+import kotlinx.coroutines.flow.collect
 
 /**
  * Root model for graphql.
@@ -10,8 +11,8 @@ class EntryNode {
 
     private val collectorService: CollectorService by lazy { CollectorService() }
 
-    fun collectData(): Boolean {
-        collectorService.collectData()
+    suspend fun collectData(): Boolean {
+        collectorService.collectData().collect()
         return true
     }
 }

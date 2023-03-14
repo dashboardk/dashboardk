@@ -4,6 +4,7 @@ import com.dashboardk.db.DatabaseFactory
 import com.dashboardk.domain.collectors.CollectorService
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.delay
 import java.time.Duration
@@ -15,8 +16,8 @@ object InitService {
 
         GlobalScope.launch {
             while (true) {
+                CollectorService().collectData().collect()
                 delay(Duration.ofHours(1))
-                CollectorService().collectData()
             }
         }
     }

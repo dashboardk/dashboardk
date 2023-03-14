@@ -12,7 +12,7 @@ data class MetaInfo(
 data class RepoMetaInfo(
     val name: String,
     val provider: RepoProvider,
-    val url: String,
+    val path: String,
     val token: String
 )
 

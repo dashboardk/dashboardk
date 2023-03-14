@@ -1,9 +1,5 @@
 repos:
   - name: backend
     provider: github
-    url: https://github.com/dashboardk/dashboardk
-    token: dummy
-  - name: frontend
-    provider: github
-    url: https://github.com/dashboardk/dashboardk
-    token: dummy
+    path: dashboardk/dashboardk
+    token: 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

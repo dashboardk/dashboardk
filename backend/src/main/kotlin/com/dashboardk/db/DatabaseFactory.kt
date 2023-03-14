@@ -27,6 +27,7 @@ class DatabaseFactory(
         Database.connect(hikari())
         transaction {
             SchemaUtils.createMissingTablesAndColumns(
+                RepoTable,
                 CommitTable
             )
         }

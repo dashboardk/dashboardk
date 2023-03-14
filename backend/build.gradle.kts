@@ -71,7 +71,12 @@ dependencies {
 
     implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("io.ktor:ktor-client-logging-jvm:2.2.4")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation(group = "com.google.truth", name = "truth", version = "1.1.3")
+    implementation(group = "io.ktor", name = "ktor-client-content-negotiation", version = ktorVersion)
+    implementation(group = "io.ktor", name = "ktor-serialization-kotlinx-json", version = ktorVersion)
+    implementation(group = "ch.qos.logback", name = "logback-classic", "1.4.5")
+    implementation(group = "io.ktor", name = "ktor-client-apache", version = ktorVersion)
 }
