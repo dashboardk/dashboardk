@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: backend
-          image: dashboardk-backend:latest
+          image: prasilabs/dashboardk-backend:0.0.1-preview
           ports:
-            - containerPort: 443
+            - containerPort: 80
           env:
             - name: DB_USER_NAME
               valueFrom:
@@ -33,13 +33,13 @@ spec:
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: backend-config
+                  name: backend-configs
                   key: db-schema-name
             - name: DB_URL
               valueFrom:
                 configMapKeyRef:
-                  name: backend-config
-                  key: db-service
+                  name: backend-configs
+                  key: db-url
 ---
 apiVersion: v1
 kind: Service
@@ -51,6 +51,6 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 443
-      targetPort: 443 #should be same as container port
+      port: 80
+      targetPort: 80 #should be same as container port
       nodePort: 30001 #should be 30000 - 32767
