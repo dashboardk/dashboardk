@@ -40,6 +40,13 @@ spec:
                 configMapKeyRef:
                   name: backend-configs
                   key: db-url
+          volumes:
+            - name: config
+              configMap:
+                name: dashboard-config
+                items:
+                  - key: "dashboard.yml"
+                    path: ../dashboard.yml
 ---
 apiVersion: v1
 kind: Service
