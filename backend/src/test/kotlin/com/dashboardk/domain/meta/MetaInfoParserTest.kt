@@ -13,11 +13,11 @@ class MetaInfoParserTest {
 repos:
   - name: backend
     provider: github
-    url: https://github.com/dashboardk/dashboardk
+    path: dashboardk/backend
     token: dummy
   - name: frontend
     provider: github
-    url: https://github.com/dashboardk/dashboardk
+    path: dashboardk/frontend
     token: dummy
         """.trimIndent()
 
