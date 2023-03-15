@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 class RepoService(private val repoInfoRepository: RepoInfoRepository) {
 
     fun getRepos(): Flow<List<Repo>> {
-        return repoInfoRepository.getRepo()
+        return repoInfoRepository.getRepos()
     }
 }

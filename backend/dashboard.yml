@@ -1,5 +1,5 @@
 repos:
-  - name: backend
+  - name: dashboardk/dashboardk
     provider: github
     path: dashboardk/dashboardk
     token: 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

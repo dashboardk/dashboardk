@@ -1,26 +1,25 @@
 package com.dashboardk.domain.collectors
 
 import com.dashboardk.di.inject
-import com.dashboardk.domain.repo.Repo
-import com.dashboardk.dtos.RepoInfoDto
+import com.dashboardk.dtos.GitHubRepoInfoDto
 import com.dashboardk.repositories.RepoInfoRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
-abstract class RepoCollector: Collector<Repo>() {
+abstract class RepoCollector: Collector() {
 
     private val repoInfoRepository by lazy { inject<RepoInfoRepository>() }
 
     @OptIn(FlowPreview::class)
-    override fun collect(): Flow<Repo> {
-        return collectData().flatMapMerge {
-            storeRepoInfo(it.name)
+    override fun collectData(): Flow<Unit> {
+        return collectRepoInfo().flatMapMerge {
+            storeRepoInfo(it.fullName)
         }
     }
 
-    abstract fun collectData(): Flow<RepoInfoDto>
+    abstract fun collectRepoInfo(): Flow<GitHubRepoInfoDto>
 
-    private fun storeRepoInfo(name: String): Flow<Repo> {
+    private fun storeRepoInfo(name: String): Flow<Unit> {
         return repoInfoRepository.storeRepo(name)
     }
 }

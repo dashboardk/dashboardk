@@ -1,20 +1,18 @@
 package com.dashboardk.domain.collectors
 
-import com.dashboardk.adapters.GithubRepoAdapter
+import com.dashboardk.adapters.GithubNetworkAdapter
 import com.dashboardk.di.inject
-import com.dashboardk.dtos.RepoInfoDto
-import io.ktor.client.call.*
-import io.ktor.client.statement.*
+import com.dashboardk.dtos.GitHubRepoInfoDto
 import kotlinx.coroutines.flow.Flow
 
-class GitHubRepoCollector(private val repoName: String, private val token: String, private val repoPath: String) :
+class GitHubRepoCollector(private val repoPath: String, private val token: String, ) :
     RepoCollector() {
 
-    private val githubRepoAdapter by lazy {
-        inject<GithubRepoAdapter>()
+    private val githubNetworkAdapter by lazy {
+        inject<GithubNetworkAdapter>()
     }
 
-    override fun collectData(): Flow<RepoInfoDto> {
-        return githubRepoAdapter.fetchRepoDetail(repoPath = repoPath, token = token)
+    override fun collectRepoInfo(): Flow<GitHubRepoInfoDto> {
+        return githubNetworkAdapter.fetchRepoDetail(repoPath = repoPath, token = token)
     }
 }

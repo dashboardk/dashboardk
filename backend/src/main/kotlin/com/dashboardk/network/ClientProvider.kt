@@ -18,7 +18,7 @@ object ClientProvider {
             }
             install(Logging) {
                 logger = Logger.DEFAULT
-                level = LogLevel.HEADERS
+                level = LogLevel.ALL
             }
             install(ContentNegotiation) {
                 json(Json {

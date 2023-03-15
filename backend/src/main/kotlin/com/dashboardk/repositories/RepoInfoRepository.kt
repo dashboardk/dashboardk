@@ -5,26 +5,26 @@ import com.dashboardk.domain.repo.Repo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.insertIgnore
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class RepoInfoRepository {
 
-    fun storeRepo(name: String): Flow<Repo> {
+    fun storeRepo(name: String): Flow<Unit> {
         return flowOf(
             transaction {
-                RepoTable.insert {
+                RepoTable.insertIgnore {
                     it[RepoTable.name] = name
                 }.let {
-                    toRepo(it)
                 }
             }
         )
     }
 
-    fun getRepo(): Flow<List<Repo>> {
+    fun getRepos(): Flow<List<Repo>> {
         return flowOf(transaction {
             RepoTable.selectAll().map {
                 toRepo(it)
@@ -32,11 +32,19 @@ class RepoInfoRepository {
         })
     }
 
-    private fun toRepo(row: ResultRow): Repo {
-        return Repo(name = row[RepoTable.name])
+    fun getRepo(repoId: Long): Flow<Repo> {
+        return flowOf(transaction {
+            toRepo(RepoTable.select(where = RepoTable.id.eq(repoId)).first())
+        })
     }
 
-    private fun toRepo(row: InsertStatement<Number>): Repo {
-        return Repo(name = row[RepoTable.name])
+    fun getRepo(name: String): Flow<Repo> {
+        return flowOf(transaction {
+            toRepo(RepoTable.select(where = RepoTable.name.eq(name)).first())
+        })
+    }
+
+    private fun toRepo(row: ResultRow): Repo {
+        return Repo(id = row[RepoTable.id], name = row[RepoTable.name])
     }
 }
