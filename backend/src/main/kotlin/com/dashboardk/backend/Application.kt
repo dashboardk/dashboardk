@@ -1,6 +1,5 @@
 package com.dashboardk.backend
 
-import com.dashboardk.backend.graphql.configureGraphQL
 import com.dashboardk.backend.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -17,8 +16,7 @@ fun Application.module() {
     configureSerialization()
     configureStatusPage()
     configureDi()
-    configureGraphQL()
-    configureWeb()
+    configureRouting()
 
     InitService.initDB(
         dbUrl = ApplicationConfig.DB_HOST,

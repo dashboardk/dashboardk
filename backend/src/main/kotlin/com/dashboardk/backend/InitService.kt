@@ -17,12 +17,12 @@ object InitService {
 
         GlobalScope.launch {
             while (true) {
+                delay(Duration.ofHours(1))
                 try {
                     CollectorService().collectData().collect()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-                delay(Duration.ofHours(1))
             }
         }
     }

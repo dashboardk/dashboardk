@@ -1,17 +1,9 @@
-val ktorVersion: String by rootProject
-val kotlinVersion: String by rootProject
-val logbackVersion: String by rootProject
-val exposedVersion: String by rootProject
-val graphqlVersion: String by rootProject
-
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.4"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
-group = "com.dashboardk.backend"
-version = "0.0.1"
 application {
     mainClass.set("com.dashboardk.backend.ApplicationKt")
 }
@@ -42,11 +34,13 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
+    val ktorVersion = "2.2.4"
+    val kotlinVersion = "1.8.10"
+    val logbackVersion = "1.2.11"
+    val exposedVersion = "0.41.1"
+    val graphqlVersion = "6.4.0"
+
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-auth-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktorVersion")
@@ -80,3 +74,15 @@ dependencies {
     implementation(group = "ch.qos.logback", name = "logback-classic", "1.4.5")
     implementation(group = "io.ktor", name = "ktor-client-apache", version = ktorVersion)
 }
+
+tasks.create<Delete>("cleanStatic") {
+    delete("src/main/resources/client")
+}
+
+tasks.create<Copy>("deployStatic") {
+    dependsOn("cleanStatic")
+    from(fileTree("../client/build"))
+    into("src/main/resources/client")
+}
+
+tasks.getByName("build").dependsOn("deployStatic")
