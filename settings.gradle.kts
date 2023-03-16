@@ -1,1 +1,2 @@
-rootProject.name = "backend"
+rootProject.name = "dashboardk"
+include(":backend")
