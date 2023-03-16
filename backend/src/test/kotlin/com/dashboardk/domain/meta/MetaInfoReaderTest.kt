@@ -14,14 +14,9 @@ class MetaInfoReaderTest {
         Truth.assertThat(config).isEqualTo(
             """
 repos:
-  - name: backend
+  - name: dashboardk/dashboardk
     provider: github
-    url: https://github.com/dashboardk/dashboardk
-    token: dummy
-  - name: frontend
-    provider: github
-    url: https://github.com/dashboardk/dashboardk
-    token: dummy
+    token: token
         """.trimIndent()
         )
     }
