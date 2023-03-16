@@ -1,0 +1,4 @@
+repos:
+  - name: dashboardk/dashboardk
+    provider: github
+    token: token
