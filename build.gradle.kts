@@ -19,7 +19,7 @@ application {
 ktor {
     docker {
         jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
-        localImageName.set("dashboardk-backend")
+        localImageName.set("dashboardk")
         imageTag.set("0.0.1-preview")
         portMappings.set(listOf(
             io.ktor.plugin.features.DockerPortMapping(
@@ -30,7 +30,7 @@ ktor {
         ))
         externalRegistry.set(
             io.ktor.plugin.features.DockerImageRegistry.dockerHub(
-                appName = provider { "dashboardk-backend" },
+                appName = provider { "dashboardk" },
                 username = providers.environmentVariable("DOCKER_HUB_USERNAME"),
                 password = providers.environmentVariable("DOCKER_HUB_PASSWORD")
             )

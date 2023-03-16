@@ -6,5 +6,5 @@ RUN gradle buildFatJar --no-daemon
 FROM openjdk:11
 EXPOSE 8080:8080
 RUN mkdir /app
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/dashboardk-backend.jar
-ENTRYPOINT ["java","-jar","/app/dashboardk-backend.jar"]
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/dashboardk.jar
+ENTRYPOINT ["java","-jar","/app/dashboardk.jar"]

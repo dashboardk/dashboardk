@@ -28,11 +28,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build and test
-      run: |
-        cd backend
-        ./gradlew build
+      run: ./gradlew build
     - name: Build docker image
-      run: |
-        cd backend
-        ./gradlew buildImage
-#        ./gradlew publishImage
+      run: ./gradlew buildImage

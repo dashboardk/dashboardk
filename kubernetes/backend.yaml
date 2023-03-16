@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: prasilabs/dashboardk-backend:0.0.1-preview
+          image: prasilabs/dashboardk:0.0.1-preview
           ports:
             - containerPort: 80
           env:
