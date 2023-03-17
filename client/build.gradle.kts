@@ -17,7 +17,7 @@ tasks.create<com.github.gradle.node.task.NodeTask>("build") {
 tasks.create<com.github.gradle.node.task.NodeTask>("run") {
     dependsOn("yarn")
     script.set(File("$projectDir/node_modules/react-scripts/bin/react-scripts.js"))
-    args.add("run")
+    args.add("start")
 }
 
 tasks.register<Delete>("clean").configure {
