@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import DashboardPageComponent from "./DashboardPageComponent";
 
 export default function DashboardPageContainer() {
 
-    const {error, loading} = useDashboard();
+    const {loading} = useDashboard();
 
 
     return (
@@ -14,8 +14,8 @@ export default function DashboardPageContainer() {
 }
 
 function useDashboard() {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [loading] = useState(true);
+    const [error] = useState('');
 
     return {error, loading};
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import DashboardPageContainer from '../pages/dashboard/DashboardPageContainer';
 import './App.css';
 

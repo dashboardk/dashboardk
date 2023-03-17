@@ -1,6 +1,5 @@
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import React from 'react';
 import LoadingComponent from '../../shared/LoadingComponent';
 import NavBarContainer from "../../shared/navbar/NavBarContainer";
 
