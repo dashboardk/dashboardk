@@ -1,21 +1,25 @@
-import React, {useState} from "react";
 import DashboardPageComponent from "./DashboardPageComponent";
+import { gql, useQuery } from "@apollo/client";
 
 export default function DashboardPageContainer() {
 
-    const {loading} = useDashboard();
+
+    const widgetsQuery = gql`
+    {
+        launchesPast(limit: 10) {
+        id
+        mission_name
+        }
+    }
+    `;
+
+    const { data, loading, error } = useQuery(widgetsQuery);
 
 
     return (
         <DashboardPageComponent
+            widgets={data}
             loading={loading}
         />
     );
-}
-
-function useDashboard() {
-    const [loading] = useState(true);
-    const [error] = useState('');
-
-    return {error, loading};
 }

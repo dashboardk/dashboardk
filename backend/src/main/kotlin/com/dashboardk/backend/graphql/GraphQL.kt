@@ -13,7 +13,7 @@ import io.ktor.server.response.*
 data class GraphQLRequest(val query: String?, val operationName: String?, val variables: Map<String, Any>?)
 
 suspend fun ApplicationCall.executeQuery() {
-    val config = SchemaGeneratorConfig(listOf("com.dashboardk.graphql.nodes"))
+    val config = SchemaGeneratorConfig(listOf("com.dashboardk.backend.graphql.nodes"))
     val queries = listOf(TopLevelObject(EntryNode()))
     val graphQL = GraphQL.newGraphQL(toSchema(config = config, queries = queries, mutations = queries)).build()
 

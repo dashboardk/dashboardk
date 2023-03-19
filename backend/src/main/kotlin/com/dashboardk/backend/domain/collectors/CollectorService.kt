@@ -1,8 +1,5 @@
 package com.dashboardk.backend.domain.collectors
 
-import com.dashboardk.backend.di.inject
-import com.dashboardk.backend.domain.collectors.GitHubCommitCollector
-import com.dashboardk.backend.domain.collectors.GitHubRepoCollector
 import com.dashboardk.backend.domain.meta.MetaInfo
 import com.dashboardk.backend.domain.meta.MetaInfoService
 import com.dashboardk.backend.domain.meta.RepoProvider.GITHUB
@@ -10,9 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
-class CollectorService {
-    private val metaInfoService by lazy { inject<MetaInfoService>() }
-    fun collectData(): Flow<Unit> {
+class CollectorService(private val metaInfoService: MetaInfoService) {
+    fun collectDataFlow(): Flow<Unit> {
         return flow {
             val configMetaData = metaInfoService.getDashboardMetaInfo()
             getCollectors(configMetaData).map {

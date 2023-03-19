@@ -1,6 +1,7 @@
 package com.dashboardk.backend
 
 import com.dashboardk.backend.db.DatabaseFactory
+import com.dashboardk.backend.di.inject
 import com.dashboardk.backend.domain.collectors.CollectorService
 import io.ktor.utils.io.*
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -11,6 +12,7 @@ import kotlinx.coroutines.time.delay
 import java.time.Duration
 
 object InitService {
+    private val collectorService: CollectorService by lazy { inject() }
 
     @OptIn(DelicateCoroutinesApi::class)
     fun initCollectors() {
@@ -19,7 +21,7 @@ object InitService {
             while (true) {
                 delay(Duration.ofHours(1))
                 try {
-                    CollectorService().collectData().collect()
+                    collectorService.collectDataFlow().collect()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -27,7 +29,7 @@ object InitService {
         }
     }
 
-    fun initDB(dbUrl: String, dbPort: String, dbUser: String, dbPassword: String, dbName:String) {
+    fun initDB(dbUrl: String, dbPort: String, dbUser: String, dbPassword: String, dbName: String) {
         DatabaseFactory(dbUrl, dbPort, dbUser, dbPassword, dbName)
     }
 }
