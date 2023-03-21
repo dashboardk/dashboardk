@@ -4,6 +4,6 @@ import java.io.File
 
 class MetaInfoReader {
     fun readConfig(): String {
-        return File("dashboard.yml").readText()
+        return File("../dashboard.yml").readText()
     }
 }

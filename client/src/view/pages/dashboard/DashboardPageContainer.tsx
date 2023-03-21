@@ -6,11 +6,15 @@ export default function DashboardPageContainer() {
 
     const widgetsQuery = gql`
     {
-        launchesPast(limit: 10) {
-        id
-        mission_name
-        }
-    }
+          metaInfo {
+                widgets {
+                          name
+                          type
+                          repoName
+                          branchName
+                        }
+                    }
+                }
     `;
 
     const { data, loading, error } = useQuery(widgetsQuery);
@@ -18,7 +22,7 @@ export default function DashboardPageContainer() {
 
     return (
         <DashboardPageComponent
-            widgets={data}
+            widgets={data?.getMetaInfo?.widgets}
             loading={loading}
         />
     );

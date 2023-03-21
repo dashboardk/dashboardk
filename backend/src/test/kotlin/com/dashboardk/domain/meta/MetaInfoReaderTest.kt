@@ -18,6 +18,11 @@ repos:
   - name: dashboardk/dashboardk
     provider: github
     token: token
+widgets:
+  - name: CommitCount
+    type: CommitCount
+    repoName: dashboardk/dashboardk
+    branchName: all
         """.trimIndent()
         )
     }

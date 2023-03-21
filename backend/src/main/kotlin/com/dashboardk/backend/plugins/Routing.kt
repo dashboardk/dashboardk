@@ -18,6 +18,9 @@ fun Application.configureRouting() {
 
 
     routing {
+        get("/graphql") {
+            call.executeQuery()
+        }
         post("/graphql") {
             call.executeQuery()
         }

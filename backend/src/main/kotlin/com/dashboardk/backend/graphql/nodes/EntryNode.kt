@@ -20,7 +20,7 @@ class EntryNode {
         return true
     }
 
-    fun getMetaInfo(): MetaInfoNode {
+    fun metaInfo(): MetaInfoNode {
         return MetaInfoNode(metaInfoService.getDashboardMetaInfo())
     }
 }

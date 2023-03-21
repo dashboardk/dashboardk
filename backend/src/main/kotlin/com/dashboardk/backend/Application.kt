@@ -17,6 +17,7 @@ fun Application.module() {
     configureStatusPage()
     configureDi()
     configureRouting()
+    configureCors()
 
     InitService.initDB(
         dbUrl = ApplicationConfig.DB_HOST,

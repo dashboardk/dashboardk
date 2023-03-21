@@ -12,12 +12,14 @@ class MetaInfoParserTest {
     fun shouldReturnConfigForGivenString() {
         val configString = """
 repos:
-  - name: dashboardk/backend
+  - name: dashboardk/dashboardk
     provider: github
-    token: dummy
-  - name: dashboardk/frontend
-    provider: github
-    token: dummy
+    token: token
+widgets:
+  - name: CommitCount
+    type: CommitCount
+    repoName: dashboardk/dashboardk
+    branchName: all  
         """.trimIndent()
 
         val config = metaInfoParser.parseConfig(configString)
