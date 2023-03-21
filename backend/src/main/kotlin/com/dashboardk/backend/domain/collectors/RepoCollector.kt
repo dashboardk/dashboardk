@@ -15,7 +15,7 @@ abstract class RepoCollector: Collector() {
     @OptIn(FlowPreview::class)
     override fun collectData(): Flow<Unit> {
         return collectRepoInfo().flatMapMerge {
-            storeRepoInfo(it.fullName)
+            storeRepoInfo(it.name)
         }
     }
 

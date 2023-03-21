@@ -27,7 +27,9 @@ class DatabaseFactory(
         transaction {
             SchemaUtils.createMissingTablesAndColumns(
                 RepoTable,
-                CommitTable
+                CommitTable,
+                CollaboratorTable,
+                PullRequestTable
             )
         }
     }

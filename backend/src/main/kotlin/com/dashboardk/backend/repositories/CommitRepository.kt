@@ -7,37 +7,33 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.insertIgnore
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-class CommitRepository {
+class CommitRepository(private val collaboratorRepository: CollaboratorRepository) {
 
     fun storeCommits(repoId: Long, commitInfos: List<CommitInfo>): Flow<Unit> {
         return flowOf(
             transaction {
                 commitInfos.forEach { commitInfo ->
-                    CommitTable.insertIgnore {
-                        it[sha] = commitInfo.sha
-                        it[message] = commitInfo.message
-                        it[CommitTable.repoId] = repoId
-                        it[committedTime] = LocalDateTime.ofInstant(commitInfo.time, ZoneId.systemDefault())
+                    if (CommitTable.select(where = CommitTable.sha.eq(commitInfo.sha)).firstOrNull() == null) {
+                        val collaborator = collaboratorRepository.getOrCreateCollaborator(
+                            name = commitInfo.committedBy,
+                            repoId = repoId
+                        )
+                        CommitTable.insert {
+                            it[sha] = commitInfo.sha
+                            it[message] = commitInfo.message
+                            it[CommitTable.repoId] = repoId
+                            it[committedBy] = collaborator.id
+                            it[committedTime] = LocalDateTime.ofInstant(commitInfo.time, ZoneId.systemDefault())
+                        }
                     }
                 }
-            }
-        )
-    }
-
-    fun storeCommit(sha: String, message: String, repoId: Long): Flow<Unit> {
-        return flowOf(
-            transaction {
-                CommitTable.insertIgnore {
-                    it[CommitTable.sha] = sha
-                    it[CommitTable.message] = message
-                    it[CommitTable.repoId] = repoId
-                }.let { }
             }
         )
     }

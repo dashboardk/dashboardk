@@ -17,5 +17,6 @@ data class GithubCommitDto(
 
 @Serializable
 data class GithubCommitAuthorDto(
+    @SerialName("name") val name: String,
     @SerialName("date") val date: String
 )

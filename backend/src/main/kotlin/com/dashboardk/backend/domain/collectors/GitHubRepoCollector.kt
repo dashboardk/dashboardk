@@ -15,12 +15,7 @@ class GitHubRepoCollector(private val repoPath: String, private val token: Strin
 
     override fun collectRepoInfo(): Flow<RepoInfo> {
         return githubNetworkAdapter.fetchRepoDetail(repoPath = repoPath, token = token).map { dto ->
-            RepoInfo(
-                name = dto.name,
-                fullName = dto.fullName,
-                description = dto.description,
-                defaultBranch = dto.defaultBranch
-            )
+            RepoInfo(name = dto.fullName)
         }
     }
 }

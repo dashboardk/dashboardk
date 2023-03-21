@@ -24,7 +24,12 @@ class GitHubCommitCollector(private val repoPath: String, private val token: Str
     override fun collectCommitInfo(): Flow<List<CommitInfo>> {
         return githubNetworkAdapter.fetchCommits(repoPath = repoPath, token = token).map { dtos ->
             dtos.map { dto ->
-                CommitInfo(sha = dto.sha, message = dto.commit.message, time = Instant.parse(dto.commit.author.date))
+                CommitInfo(
+                    sha = dto.sha,
+                    message = dto.commit.message,
+                    committedBy = dto.commit.author.name,
+                    time = Instant.parse(dto.commit.author.date)
+                )
             }
         }
     }
