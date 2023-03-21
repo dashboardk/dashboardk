@@ -11,5 +11,11 @@ data class GithubCommitInfoDto(
 
 @Serializable
 data class GithubCommitDto(
-    @SerialName("message") val message: String
+    @SerialName("message") val message: String,
+    @SerialName("author") val author: GithubCommitAuthorDto
+)
+
+@Serializable
+data class GithubCommitAuthorDto(
+    @SerialName("date") val date: String
 )

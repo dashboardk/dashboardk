@@ -2,6 +2,8 @@ package com.dashboardk.backend.db
 
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.javatime.datetime
+import java.time.LocalDateTime
 
 object WidgetTable : Table(name = "widget") {
     val id: Column<Long> = long("id").autoIncrement()
@@ -30,6 +32,7 @@ object CommitTable : Table(name = "commit") {
     val sha: Column<String> = varchar("sha", 1000)
     val message: Column<String> = varchar("message", 1000)
     val repoId: Column<Long> = long("repo_id").references(RepoTable.id)
+    val committedTime: Column<LocalDateTime> = datetime("committed_time")
 
     override val primaryKey = PrimaryKey(id, name = "PK_Commit_ID")
 

@@ -2,6 +2,7 @@ package com.dashboardk.backend.domain.collectors
 
 import com.dashboardk.backend.di.inject
 import com.dashboardk.backend.domain.collectors.Collector
+import com.dashboardk.backend.domain.collectors.infos.RepoInfo
 import com.dashboardk.backend.dtos.GitHubRepoInfoDto
 import com.dashboardk.backend.repositories.RepoInfoRepository
 import kotlinx.coroutines.FlowPreview
@@ -18,7 +19,7 @@ abstract class RepoCollector: Collector() {
         }
     }
 
-    abstract fun collectRepoInfo(): Flow<GitHubRepoInfoDto>
+    abstract fun collectRepoInfo(): Flow<RepoInfo>
 
     private fun storeRepoInfo(name: String): Flow<Unit> {
         return repoInfoRepository.storeRepo(name)

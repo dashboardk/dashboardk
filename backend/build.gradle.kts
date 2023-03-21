@@ -13,13 +13,15 @@ ktor {
         jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
         localImageName.set("dashboardk")
         imageTag.set("0.0.1-preview")
-        portMappings.set(listOf(
-            io.ktor.plugin.features.DockerPortMapping(
-                80,
-                8080,
-                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+        portMappings.set(
+            listOf(
+                io.ktor.plugin.features.DockerPortMapping(
+                    80,
+                    8080,
+                    io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+                )
             )
-        ))
+        )
         externalRegistry.set(
             io.ktor.plugin.features.DockerImageRegistry.dockerHub(
                 appName = provider { "dashboardk" },
@@ -55,6 +57,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-gson-jvm:$ktorVersion")
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation(group = "org.jetbrains.exposed", name = "exposed-java-time", version = exposedVersion)
     implementation("io.insert-koin:koin-ktor:3.3.1")
     implementation(group = "org.postgresql", name = "postgresql", version = "42.2.27")
     implementation(group = "com.charleskorn.kaml", name = "kaml", version = "0.52.0")

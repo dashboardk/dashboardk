@@ -2,6 +2,7 @@ package com.dashboardk.backend.domain.collectors
 
 import com.dashboardk.backend.di.inject
 import com.dashboardk.backend.domain.collectors.Collector
+import com.dashboardk.backend.domain.collectors.infos.CommitInfo
 import com.dashboardk.backend.dtos.GithubCommitInfoDto
 import com.dashboardk.backend.repositories.CommitRepository
 import kotlinx.coroutines.FlowPreview
@@ -22,5 +23,5 @@ abstract class CommitCollector : Collector() {
 
     abstract fun getRepoId(): Flow<Long>
 
-    abstract fun collectCommitInfo(): Flow<List<GithubCommitInfoDto>>
+    abstract fun collectCommitInfo(): Flow<List<CommitInfo>>
 }
