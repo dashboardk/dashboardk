@@ -27,7 +27,7 @@ class CollaboratorRepository {
         }
     }
 
-    private fun toCollaborator(row: ResultRow): Collaborator {
+    fun toCollaborator(row: ResultRow): Collaborator {
         return Collaborator(
             id = row[CollaboratorTable.id],
             name = row[CollaboratorTable.name]

@@ -1,9 +1,9 @@
 package com.dashboardk.backend.domain.meta
 
-import java.io.File
+import java.io.FileNotFoundException
 
 class MetaInfoReader {
     fun readConfig(): String {
-        return File("../dashboard.yml").readText()
+        return this.javaClass.classLoader.getResource("dashboard.yml")?.readText() ?: throw FileNotFoundException("dashboard file not found")
     }
 }

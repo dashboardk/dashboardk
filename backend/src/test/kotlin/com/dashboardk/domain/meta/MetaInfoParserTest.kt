@@ -16,10 +16,10 @@ repos:
     provider: github
     token: token
 widgets:
-  - name: CommitCount
+  - !<CommitCount>
+    name: CommitCount
     type: CommitCount
     repoName: dashboardk/dashboardk
-    branchName: all  
         """.trimIndent()
 
         val config = metaInfoParser.parseConfig(configString)

@@ -1,0 +1,9 @@
+repos:
+  - name: dashboardk/dashboardk
+    provider: github
+    token: token
+widgets:
+  - !<CommitCount>
+    name: CommitCount
+    type: CommitCount
+    repoName: dashboardk/dashboardk

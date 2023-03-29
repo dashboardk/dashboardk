@@ -65,6 +65,8 @@ object CollaboratorTable : Table(name = "collaborator") {
     val name: Column<String> = varchar("name", 100)
     val repoId: Column<Long> = long("repo_id").references(RepoTable.id)
 
+    override val primaryKey = PrimaryKey(CollaboratorTable.id, name = "PK_COLLAB_ID")
+
     init {
         uniqueIndex(
             customIndexName = "UK_REPO_COLLAB_NAME",
