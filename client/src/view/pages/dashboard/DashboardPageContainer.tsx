@@ -10,8 +10,7 @@ export default function DashboardPageContainer() {
                 widgets {
                           name
                           type
-                          repoName
-                          branchName
+                          data
                         }
                     }
                 }

@@ -15,14 +15,14 @@ class MetaInfoReaderTest {
         Truth.assertThat(config).isEqualTo(
             """
 repos:
-  - name: dashboardk/dashboardk
+  - name: dashboardk/backend
     provider: github
     token: token
 widgets:
-  - name: CommitCount
+  - !<CommitCount>
+    name: CommitCount
     type: CommitCount
-    repoName: dashboardk/dashboardk
-    branchName: all
+    repoName: dashboardk/backend
         """.trimIndent()
         )
     }

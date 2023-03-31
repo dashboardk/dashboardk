@@ -7,11 +7,8 @@ import com.dashboardk.backend.domain.collectors.infos.CommitInfo
 import com.dashboardk.backend.domain.commit.Commit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -51,7 +48,17 @@ class CommitRepository(private val collaboratorRepository: CollaboratorRepositor
 
     fun getCommitCount(repoName: String): Flow<Long> {
         return flowOf(transaction {
-            CommitTable.innerJoin(CollaboratorTable).innerJoin(RepoTable).select(
+            (CommitTable.join(
+                otherTable = CollaboratorTable,
+                joinType = JoinType.INNER,
+                onColumn = CommitTable.committedBy,
+                otherColumn = CollaboratorTable.id
+            )).join(
+                otherTable = RepoTable,
+                joinType = JoinType.INNER,
+                onColumn = CommitTable.repoId,
+                otherColumn = RepoTable.id
+            ).select(
                 where = ((CommitTable.repoId.eq(RepoTable.id)) and CommitTable.committedBy.eq(CollaboratorTable.id) and RepoTable.name.eq(
                     repoName
                 ))
