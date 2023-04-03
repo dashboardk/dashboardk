@@ -1,5 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import ReactGridLayout from 'react-grid-layout';
 import { WidgetInfo } from '../../models/WidgetInfo';
 import LoadingComponent from '../../shared/LoadingComponent';
 import NavBarContainer from "../../shared/navbar/NavBarContainer";
@@ -38,12 +39,25 @@ function getWidgetsComponents(widgets: WidgetInfo[] | null) {
     if (widgets == null) {
         return <div/>
     } else {
-        return <Grid container>
+        return <ReactGridLayout layout={generateLayout(widgets)}>
             {widgets.map((element, index) => {
-                return <Grid key={index}>
+                return <div key={index}>
                     <WidgetWrapperComponent widget={element} />
-                </Grid>
+                </div>
             })}
-        </Grid>
+        </ReactGridLayout>
     }
 }
+
+function generateLayout(widgets: WidgetInfo[]) {
+    return widgets.map((item, index) => {
+      const y = Math.ceil(Math.random() * 4) + 1;
+      return {
+        x: (index * 2) % 12,
+        y: Math.floor(index / 6) * y,
+        w: 2,
+        h: y,
+        i: index.toString()
+      };
+    });
+  }
