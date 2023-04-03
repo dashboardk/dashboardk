@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { WidgetInfo } from '../../models/WidgetInfo';
 import LoadingComponent from '../../shared/LoadingComponent';
 import NavBarContainer from "../../shared/navbar/NavBarContainer";
-import WidgetWrapperComponent from '../../shared/WidgetWrapperComponent';
+import WidgetWrapperComponent from '../../shared/WidgetWrapperContainer';
 
 interface DashboardPageProps {
     widgets: WidgetInfo[] | null
@@ -36,12 +36,12 @@ function getLoadingComponent(loading: boolean | null) {
 
 function getWidgetsComponents(widgets: WidgetInfo[] | null) {
     if (widgets == null) {
-        return <div />
+        return <div/>
     } else {
         return <Grid container>
-            {widgets.map((item, index) => {
-                return <Grid item>
-                    <WidgetWrapperComponent widget={item} />
+            {widgets.map((element, index) => {
+                return <Grid key={index}>
+                    <WidgetWrapperComponent widget={element} />
                 </Grid>
             })}
         </Grid>

@@ -10,7 +10,6 @@ export default function DashboardPageContainer() {
                 widgets {
                           name
                           type
-                          data
                         }
                     }
                 }
@@ -21,7 +20,7 @@ export default function DashboardPageContainer() {
 
     return (
         <DashboardPageComponent
-            widgets={data?.getMetaInfo?.widgets}
+            widgets={data?.metaInfo?.widgets}
             loading={loading}
         />
     );

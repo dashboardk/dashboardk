@@ -5,6 +5,7 @@ import com.dashboardk.backend.domain.collectors.CollectorService
 import com.dashboardk.backend.domain.meta.MetaInfoService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 
 /**
  * Root model for graphql.
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.collect
  */
 class EntryNode {
 
-    private val collectorService: CollectorService by lazy { inject()  }
+    private val collectorService: CollectorService by lazy { inject() }
     private val metaInfoService: MetaInfoService by lazy { inject() }
 
     suspend fun collectData(): Boolean {
@@ -22,5 +23,11 @@ class EntryNode {
 
     fun metaInfo(): MetaInfoNode {
         return MetaInfoNode(metaInfoService.getDashboardMetaInfo())
+    }
+
+    suspend fun widgetData(widgetName: String): String? {
+        return Gson().toJson(
+            metaInfoService.getDashboardMetaInfo().widgets.find { it.name == widgetName }?.getData()?.first()
+        )
     }
 }
