@@ -20,7 +20,7 @@ export default function WidgetWrapperContainer(props: WidgetWrapperContainerProp
     const { data, loading, error } = useQuery(widgetDataQuery);
 
   return (
-    <Card>
+    <Card sx={{width: '100%', height:'100%'}}>
       {getWidgetFromResponse(props.widget.name, props.widget.type, data, loading, error)}        
     </Card>
   );
