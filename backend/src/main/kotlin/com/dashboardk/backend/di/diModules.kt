@@ -1,6 +1,7 @@
 package com.dashboardk.backend.di
 
 import com.dashboardk.backend.adapters.GithubNetworkAdapter
+import com.dashboardk.backend.domain.collectors.CollectorService
 import com.dashboardk.backend.domain.meta.MetaInfoParser
 import com.dashboardk.backend.domain.meta.MetaInfoReader
 import com.dashboardk.backend.domain.meta.MetaInfoService
@@ -19,4 +20,5 @@ val appModule = module {
     factory { CollaboratorRepository() }
     factory { MetaInfoService(get(), get()) }
     factory { GithubNetworkAdapter(get()) }
+    factory { CollectorService(get()) }
 }

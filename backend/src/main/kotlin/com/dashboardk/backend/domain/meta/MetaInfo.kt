@@ -1,6 +1,6 @@
 package com.dashboardk.backend.domain.meta
 
-import com.dashboardk.backend.domain.widgets.Widget
+import com.dashboardk.backend.domain.widgets.types.Widget
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

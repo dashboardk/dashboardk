@@ -1,4 +1,4 @@
-package com.dashboardk.backend.domain.widgets
+package com.dashboardk.backend.domain.widgets.types
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Serializable

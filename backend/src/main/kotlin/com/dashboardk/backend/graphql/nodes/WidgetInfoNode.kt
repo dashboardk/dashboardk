@@ -1,6 +1,6 @@
 package com.dashboardk.backend.graphql.nodes
 
-import com.dashboardk.backend.domain.widgets.Widget
+import com.dashboardk.backend.domain.widgets.types.Widget
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
 

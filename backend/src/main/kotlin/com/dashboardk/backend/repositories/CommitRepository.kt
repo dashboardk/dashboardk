@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -34,19 +35,32 @@ class CommitRepository(private val collaboratorRepository: CollaboratorRepositor
         })
     }
 
-    fun getCommits(repoName: String): Flow<List<Commit>> {
+    fun getCommits(repoName: String, from: LocalDateTime): Flow<List<Commit>> {
         return flowOf(transaction {
-            CommitTable.innerJoin(CollaboratorTable).innerJoin(RepoTable).select(
-                where = ((CommitTable.repoId.eq(RepoTable.id)) and CommitTable.committedBy.eq(CollaboratorTable.id) and RepoTable.name.eq(
-                    repoName
-                ))
+
+            (CommitTable.join(
+                otherTable = CollaboratorTable,
+                joinType = JoinType.INNER,
+                onColumn = CommitTable.committedBy,
+                otherColumn = CollaboratorTable.id
+            )).join(
+                otherTable = RepoTable,
+                joinType = JoinType.INNER,
+                onColumn = CommitTable.repoId,
+                otherColumn = RepoTable.id
+            ).select(
+                where = ((
+                        CommitTable.repoId.eq(RepoTable.id)) and
+                        CommitTable.committedBy.eq(CollaboratorTable.id) and
+                        RepoTable.name.eq(repoName) and
+                        CommitTable.committedTime.greaterEq(from))
             ).map {
                 toCommit(it)
             }
         })
     }
 
-    fun getCommitCount(repoName: String): Flow<Long> {
+    fun getCommitCount(repoName: String, from: LocalDateTime): Flow<Long> {
         return flowOf(transaction {
             (CommitTable.join(
                 otherTable = CollaboratorTable,
@@ -59,9 +73,10 @@ class CommitRepository(private val collaboratorRepository: CollaboratorRepositor
                 onColumn = CommitTable.repoId,
                 otherColumn = RepoTable.id
             ).select(
-                where = ((CommitTable.repoId.eq(RepoTable.id)) and CommitTable.committedBy.eq(CollaboratorTable.id) and RepoTable.name.eq(
-                    repoName
-                ))
+                where = ((CommitTable.repoId.eq(RepoTable.id)) and
+                        CommitTable.committedBy.eq(CollaboratorTable.id) and
+                        RepoTable.name.eq(repoName) and
+                        CommitTable.committedTime.greaterEq(from))
             ).count()
         })
     }
